@@ -12,7 +12,7 @@ public class Exercise1 : MonoBehaviour
     void Update()
     {
         transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + speed * Time.deltaTime);
-        hunger += 0.1f;
+        hunger += 0.1f * Time.deltaTime;
         hunger += speed * Time.deltaTime * 0.1f;
         weight -= speed * Time.deltaTime * 0.1f;
     }
