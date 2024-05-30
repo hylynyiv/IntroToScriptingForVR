@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Test : MonoBehaviour
 {
-    int count;
     string petName = "Garfield";
     float weight = 13.5f;
     float weightGain = 0.5f;
@@ -18,14 +17,12 @@ public class Test : MonoBehaviour
 
     void Start()
     {
-        float newWeight = weight + weightGain;
-        Debug.Log($"{petName}'s new weight is {newWeight}.\n");
+        weight += weightGain;
+        Debug.Log($"{petName}'s new weight is {weight}.\n");
     }
 
     void Update()
     {
-        count += 1;
-        Debug.Log($"{count}");
         age += agingRate;
         Debug.Log($"{petName}'s age is now {age}.\n");
     }
