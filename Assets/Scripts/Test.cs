@@ -10,15 +10,14 @@ public class Test : MonoBehaviour
     int age = 8;
     float agingRate = 1f / 30 / 60; // we want Garfield to age 1 year every 30 
     // seconds. With a frame rate of 60 Hz, which is 60 frames per second, we 
-    // can calculate the percentage of aging per frame by dividing 1/30/60 (or .
-    // 1/(30*60)
+    // can calculate the percentage of aging per frame by dividing 1/30/60 or 
+    // 1/(30*60).
 
     float newAge = 8;
 
     void Start()
     {
         float newWeight = weight + weightGain;
-
         Debug.Log($"{petName}'s new weight is {newWeight}.\n");
     }
 
