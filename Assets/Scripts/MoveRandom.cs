@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class MoveRandom : MonoBehaviour
 {
-    public float speed = 1f;
-    public float minSpeed = -3f;
-    public float maxSpeed = 3f;
+    public float speedX;
+    public float speedZ;
+
+    public float minSpeed = -0.1f;
+    public float maxSpeed = 0.1f;
+
     public float changeInterval = 2.0f;
     public float timer;
-
 
     void Update()
     {
@@ -17,10 +19,10 @@ public class MoveRandom : MonoBehaviour
         if (timer >= changeInterval)
         {
             timer = 0;
-            speed = Random.Range(minSpeed, maxSpeed);
+            speedX = Random.Range(minSpeed, maxSpeed);
+            speedZ = Random.Range(minSpeed, maxSpeed);
         }
-        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + speed * Time.deltaTime);
+        transform.position = new Vector3(transform.position.x + speedX, transform.position.y, transform.position.z + speedZ );
     }
 }
-
 
