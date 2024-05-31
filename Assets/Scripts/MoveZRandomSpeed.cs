@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class MoveZRandomSpeed : MonoBehaviour
 {
-    public float speed = 1f;
-    public float minSpeed = -3f;
-    public float maxSpeed = 3f;
+    public float speed;
+    public float minSpeed = -0.1f;
+    public float maxSpeed = 0.1f;
     public float changeInterval = 2.0f;
     public float timer;
 
@@ -18,7 +18,7 @@ public class MoveZRandomSpeed : MonoBehaviour
             timer = 0;
             speed = Random.Range(minSpeed, maxSpeed);
         }
-        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + speed * Time.deltaTime);
+        transform.position += new Vector3(0, 0, speed) * Time.deltaTime;
     }
 }
 

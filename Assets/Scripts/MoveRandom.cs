@@ -6,10 +6,8 @@ public class MoveRandom : MonoBehaviour
 {
     public float speedX;
     public float speedZ;
-
-    public float minSpeed = -0.1f;
-    public float maxSpeed = 0.1f;
-
+    public float minSpeed = -4f;
+    public float maxSpeed = 4f;
     public float changeInterval = 2.0f;
     public float timer;
 
@@ -22,7 +20,7 @@ public class MoveRandom : MonoBehaviour
             speedX = Random.Range(minSpeed, maxSpeed);
             speedZ = Random.Range(minSpeed, maxSpeed);
         }
-        transform.position = new Vector3(transform.position.x + speedX, transform.position.y, transform.position.z + speedZ );
+        transform.position += new Vector3(speedX, 0 , speedZ) * Time.deltaTime;
     }
 }
 
