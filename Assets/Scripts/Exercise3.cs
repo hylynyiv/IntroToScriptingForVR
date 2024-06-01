@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// Exercise 3 Prompt:
+
+// Include a randomization of the changeInterval. I.e. it should be different
+// every time to make the object's movement even more natural and less predictable.
+
 public class Exercise3 : MonoBehaviour
 {
     public float speedX;
@@ -36,6 +42,7 @@ public class Exercise3 : MonoBehaviour
         }
     }
 
+    // We are using a parameter to adjust the max interval time if necessary
     void SetRandomDirSpeedInterval(float maxInterval)
     {
         speedX = Random.Range(minSpeed, maxSpeed);
