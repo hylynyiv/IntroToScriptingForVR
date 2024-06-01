@@ -9,6 +9,7 @@ public class Exercise3 : MonoBehaviour
     public float minSpeed = -4f;
     public float maxSpeed = 4f;
     public float changeInterval = 2.0f;
+    public float boundary = 20f;
     public float timer;
 
     void Update()
@@ -18,12 +19,24 @@ public class Exercise3 : MonoBehaviour
         if (timer >= changeInterval)
         {
             timer = 0;
-            SetRandomDirAndSpeed(4f);
+            SetRandomDirSpeedInterval(4f);
         }
         transform.position += new Vector3(speedX, 0, speedZ) * Time.deltaTime;
+
+        // Boundary Check
+        if (Mathf.Abs(transform.position.x) >= boundary)
+        {
+            speedX = -speedX;
+            transform.position = new Vector3(Mathf.Sign(transform.position.x) * boundary, 0, transform.position.z);
+        }
+        if (Mathf.Abs(transform.position.z) >= boundary)
+        {
+            speedZ = -speedZ;
+            transform.position = new Vector3(transform.position.x, 0, Mathf.Sign(speedZ) * boundary);
+        }
     }
 
-    void SetRandomDirAndSpeed(float maxInterval)
+    void SetRandomDirSpeedInterval(float maxInterval)
     {
         speedX = Random.Range(minSpeed, maxSpeed);
         speedZ = Random.Range(minSpeed, maxSpeed);

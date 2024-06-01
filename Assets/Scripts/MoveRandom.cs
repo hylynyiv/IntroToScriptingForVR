@@ -10,7 +10,6 @@ public class MoveRandom : MonoBehaviour
     public float maxSpeed = 4f;
     public float changeInterval = 2.0f;
     public float timer;
-    //defining a boundary
     public int boundary = 10;
 
     void Update()
@@ -26,13 +25,16 @@ public class MoveRandom : MonoBehaviour
 
         transform.position += new Vector3(speedX, 0 , speedZ) * Time.deltaTime;
 
-        if (Mathf.Abs(transform.position.x) >= boundary){
+        // Boundary Check
+        if (Mathf.Abs(transform.position.x) >= boundary)
+        {
             speedX = -speedX;
+            transform.position = new Vector3(Mathf.Sign(transform.position.x) * boundary, 0, transform.position.z);
         }
-
         if (Mathf.Abs(transform.position.z) >= boundary)
         {
             speedZ = -speedZ;
+            transform.position = new Vector3(transform.position.x, 0, Mathf.Sign(speedZ) * boundary);
         }
     }
 }

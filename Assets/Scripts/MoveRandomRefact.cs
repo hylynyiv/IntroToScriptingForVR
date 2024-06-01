@@ -9,6 +9,7 @@ public class MoveRandomRefact : MonoBehaviour
     public float minSpeed = -4f;
     public float maxSpeed = 4f;
     public float changeInterval = 2.0f;
+    public float boundary = 20f;
     public float timer;
 
     void Update()
@@ -21,6 +22,18 @@ public class MoveRandomRefact : MonoBehaviour
             SetRandomDirAndSpeed();
         }
         transform.position += new Vector3(speedX, 0, speedZ) * Time.deltaTime;
+
+        // Boundary Check
+        if (Mathf.Abs(transform.position.x) >= boundary)
+        {
+            speedX = -speedX;
+            transform.position = new Vector3(Mathf.Sign(transform.position.x) * boundary, 0, transform.position.z);
+        }
+        if (Mathf.Abs(transform.position.z) >= boundary)
+        {
+            speedZ = -speedZ;
+            transform.position = new Vector3(transform.position.x, 0, Mathf.Sign(speedZ) * boundary);
+        }
     }
 
     void SetRandomDirAndSpeed() {
