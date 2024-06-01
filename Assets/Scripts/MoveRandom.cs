@@ -34,7 +34,7 @@ public class MoveRandom : MonoBehaviour
         if (Mathf.Abs(transform.position.z) >= boundary)
         {
             speedZ = -speedZ;
-            transform.position = new Vector3(transform.position.x, 0, Mathf.Sign(speedZ) * boundary);
+            transform.position = new Vector3(transform.position.x, 0, Mathf.Sign(transform.position.z) * boundary);
         }
     }
 }
