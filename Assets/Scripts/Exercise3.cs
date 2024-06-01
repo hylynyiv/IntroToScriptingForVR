@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 // Exercise 3 Prompt:
 
 // Include a randomization of the changeInterval. I.e. it should be different
