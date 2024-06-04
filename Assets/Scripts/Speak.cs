@@ -1,16 +1,13 @@
 using UnityEngine;
+using TMPro;
 
 public class Speak : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private TextMeshPro NPCText;
+
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        NPCText = GetComponent<TextMeshPro>();
+        NPCText.text = "Hello World!";
     }
 }
