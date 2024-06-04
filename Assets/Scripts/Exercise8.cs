@@ -16,9 +16,10 @@ public class Exercise8 : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        if(timer > 2f)
+        if(timer >= 2f)
         {
             NPCText.text = speech[Random.Range(0, speech.Length)];
+            timer = 0;
         }
         
     }
