@@ -33,15 +33,16 @@ public class RB_MoveRandom : MonoBehaviour
         rb.velocity = new Vector3(speedX, rb.velocity.y, speedZ);
 
         // Boundary Check
-        if (Mathf.Abs(rb.position.x) >= boundary)
+        if (Mathf.Abs(rb.position.x) > boundary)
         {
             speedX = -speedX;
-            rb.position = new Vector3(Mathf.Sign(rb.position.x) * boundary, rb.position.y, rb.position.z);
+            rb.position = new Vector3(Mathf.Sign(rb.position.x) * (boundary - 0.1f), rb.position.y, rb.position.z);
+            // We include a little offset to prevent the object to be stuck in the corners
         }
-        if (Mathf.Abs(rb.position.z) >= boundary)
+        if (Mathf.Abs(rb.position.z) > boundary)
         {
             speedZ = -speedZ;
-            rb.position = new Vector3(rb.position.x, rb.position.y, Mathf.Sign(rb.position.z) * boundary);
+            rb.position = new Vector3(rb.position.x, rb.position.y, Mathf.Sign(rb.position.z) * (boundary-0.1f));
         }
     }
 
