@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Exercise1 : MonoBehaviour
+public class Pet : MonoBehaviour
 {
     public string petName = "Garfield";
     public float weight = 13.5f;
@@ -14,5 +14,12 @@ public class Exercise1 : MonoBehaviour
         hunger += speed * Time.deltaTime * 0.1f;
         weight -= speed * Time.deltaTime * 0.1f;
     }
+
+    public void Eat(float food)
+    {
+        hunger -= food;
+        weight += food;
+    }
+
 }
 

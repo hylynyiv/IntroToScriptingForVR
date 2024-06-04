@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RB_TransformTranslate : MonoBehaviour
@@ -11,3 +9,5 @@ public class RB_TransformTranslate : MonoBehaviour
         transform.Translate(Vector3.forward * speed * Time.deltaTime);        
     }
 }
+
+

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class RB_MoveRandom : MonoBehaviour
+public class RB_Move : MonoBehaviour
 {
     private float speedX;
     private float speedZ;
@@ -9,7 +9,7 @@ public class RB_MoveRandom : MonoBehaviour
     public float changeInterval = 2.0f;
     public float timer;
     public int boundary = 30;
-    private Rigidbody rb;
+    private Rigidbody rb;   
 
     void Start()
     {
@@ -17,9 +17,9 @@ public class RB_MoveRandom : MonoBehaviour
         SetRandomDirAndSpeed(4f);
     }
 
-    void FixedUpdate()
+    void Update()
     {
-        timer += Time.fixedDeltaTime;
+        timer += Time.deltaTime;
 
         if (timer >= changeInterval)
         {
@@ -27,20 +27,20 @@ public class RB_MoveRandom : MonoBehaviour
             SetRandomDirAndSpeed(4f);
         }
 
-        // Apply movement by setting velocity
-        rb.velocity = new Vector3(speedX, rb.velocity.y, speedZ);
+        // Apply movement
+        Vector3 movement = new Vector3(speedX, 0, speedZ) * Time.deltaTime;
+        rb.MovePosition(rb.position + movement);
 
         // Boundary Check
-        if (Mathf.Abs(rb.position.x) > boundary)
+        if (Mathf.Abs(rb.position.x) >= boundary)
         {
             speedX = -speedX;
-            rb.position = new Vector3(Mathf.Sign(rb.position.x) * (boundary - 0.1f), rb.position.y, rb.position.z);
-            // We include a little offset to prevent the object to be stuck in the corners
+            rb.position = new Vector3(Mathf.Sign(rb.position.x) * boundary, rb.position.y, rb.position.z);
         }
-        if (Mathf.Abs(rb.position.z) > boundary)
+        if (Mathf.Abs(rb.position.z) >= boundary)
         {
             speedZ = -speedZ;
-            rb.position = new Vector3(rb.position.x, rb.position.y, Mathf.Sign(rb.position.z) * (boundary-0.1f));
+            rb.position = new Vector3(rb.position.x, rb.position.y, Mathf.Sign(rb.position.z) * boundary);
         }
     }
 

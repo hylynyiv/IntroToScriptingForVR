@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Exercise6 : MonoBehaviour
@@ -9,7 +7,7 @@ public class Exercise6 : MonoBehaviour
     private Color originalColor;
     public Color targetColor = new Color (1,0,0);
     private float changeDuration = 5f;
-    private float elapsedTime = 0f;
+    private float elapsedTime;
     private bool isReturning = false;
     
 
