@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RB_AddForce : MonoBehaviour
+public class OnCollisionRed : MonoBehaviour
 {
-    public float force = 10f;
     private Rigidbody rb;
 
     void Start()
@@ -12,9 +11,8 @@ public class RB_AddForce : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    void FixedUpdate()
+    void OnCollisionEnter(Collision collision)
     {
-        rb.AddForce(Vector3.forward * force);
+        GetComponent<Renderer>().material.color = Color.red;
     }
 }
-
