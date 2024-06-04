@@ -5,14 +5,11 @@ public class Exercise8 : MonoBehaviour
 {
     private TextMeshPro NPCText;
     private float timer;
-
-
-    public string[] speech = { "Hello", "Sorry", "Do I know you", "Apologize!"}; 
+    public string[] speech = { "Hello", "Sorry", "Do I know you", "Apologize!", "You stepped on my tail, you monster!" }; 
 
     void Start()
     {
         NPCText = GetComponent<TextMeshPro>();
-
         NPCText.text = speech[0];
     }
 
