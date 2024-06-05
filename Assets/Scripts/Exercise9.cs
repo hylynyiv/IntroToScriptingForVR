@@ -1,10 +1,8 @@
 using UnityEngine;
-// with offset
-
-using UnityEngine;
 
 public class FollowObject : MonoBehaviour
 {
+    // with offset
     public Transform target; // Reference to the target object's transform
     public float verticalOffset = 2.0f; // Vertical offset
 
@@ -23,16 +21,14 @@ public class FollowObject : MonoBehaviour
 
 
 
-// without offset
-//public class FollowObject : MonoBehaviour
-//{
-//    public Transform target; 
+////without offset
+//public Transform target;
 
-//    void Update()
+//void Update()
+//{
+//    if (target != null)
 //    {
-//        if (target != null)
-//        {
-//            transform.position = target.position;
-//        }
+//        transform.position = target.position;
 //    }
 //}
+
