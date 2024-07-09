@@ -9,8 +9,8 @@ using UnityEngine;
 public class PlayerMovementWithMouseLook : MonoBehaviour
 
 {
-    public float speed = 10.0f;
-    public float mouseSensitivity = 100.0f;
+    public float speed = 7.0f;
+    public float mouseSensitivity = 300.0f;
     public Transform playerCamera;
 
     private float xRotation = 0.0f;
