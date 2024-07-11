@@ -2,7 +2,16 @@ using UnityEngine;
 
 public class CollisionSoundPlayer : MonoBehaviour
 {
-    public AudioSource audioSource;
+    private AudioSource audioSource;
+
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            Debug.LogWarning("No AudioSource component found on this GameObject. Please add an AudioSource component.");
+        }
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
