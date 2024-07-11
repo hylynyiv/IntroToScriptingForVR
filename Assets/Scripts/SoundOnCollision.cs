@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CollisionSoundPlayer : MonoBehaviour
+public class SoundOnCollision: MonoBehaviour
 {
     private AudioSource audioSource;
 
