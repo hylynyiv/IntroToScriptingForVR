@@ -8,13 +8,27 @@ public class AnimatedPlayerMovementWMouseLook : MonoBehaviour
 
     [Header("Movement Settings")]
     public float speed = 12f;
-    public CharacterController controller;
-    public Animator animator;
 
+    private CharacterController controller;
+    private Animator animator;
     private float xRotation = 0f;
 
     void Start()
     {
+        // Ensure that the CharacterController and Animator components are assigned
+        controller = GetComponent<CharacterController>();
+        animator = GetComponent<Animator>();
+
+        if (controller == null)
+        {
+            Debug.LogError("CharacterController component missing from the player.");
+        }
+
+        if (animator == null)
+        {
+            Debug.LogError("Animator component missing from the player.");
+        }
+
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -43,15 +57,21 @@ public class AnimatedPlayerMovementWMouseLook : MonoBehaviour
 
         Vector3 move = transform.right * x + transform.forward * z;
 
-        controller.Move(move * speed * Time.deltaTime);
-
-        if (move != Vector3.zero)
+        if (controller != null)
         {
-            animator.SetBool("isMoving", true);
+            controller.Move(move * speed * Time.deltaTime);
         }
-        else
+
+        if (animator != null)
         {
-            animator.SetBool("isMoving", false);
+            if (move != Vector3.zero)
+            {
+                animator.SetBool("isMoving", true);
+            }
+            else
+            {
+                animator.SetBool("isMoving", false);
+            }
         }
     }
 }
