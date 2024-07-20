@@ -3,11 +3,11 @@ using UnityEngine;
 public class AnimatedPlayerMovementWMouseLook : MonoBehaviour
 {
     [Header("Mouse Look Settings")]
-    public float mouseSensitivity = 100f;
+    public float mouseSensitivity = 200f;
     public Transform cameraTransform;
 
     [Header("Movement Settings")]
-    public float speed = 12f;
+    public float speed = 7f;
 
     private CharacterController controller;
     private Animator animator;
