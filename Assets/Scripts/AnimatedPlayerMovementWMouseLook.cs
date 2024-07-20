@@ -12,7 +12,7 @@ public class AnimatedPlayerMovementWMouseLook : MonoBehaviour
     private CharacterController controller;
     private Animator animator;
     private float xRotation;
-    private float yRotation
+    private float yRotation;
 
     void Start()
     {
