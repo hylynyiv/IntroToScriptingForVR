@@ -7,11 +7,12 @@ public class AnimatedPlayerMovementWMouseLook : MonoBehaviour
     public Transform cameraTransform;
 
     [Header("Movement Settings")]
-    public float speed = 7f;
+    public float speed =Plaf;
 
     private CharacterController controller;
     private Animator animator;
-    private float xRotation = 0f;
+    private float xRotation;
+    private float yRotation
 
     void Start()
     {
@@ -30,6 +31,16 @@ public class AnimatedPlayerMovementWMouseLook : MonoBehaviour
         }
 
         Cursor.lockState = CursorLockMode.Locked;
+
+        // Initialize rotation with the current camera rotation
+        xRotation = cameraTransform.localEulerAngles.x;
+        yRotation = transform.localEulerAngles.y;
+
+        // Ensure the camera is a child of the player object
+        if (cameraTransform.parent != transform)
+        {
+            cameraTransform.SetParent(transform);
+        }
     }
 
     void Update()
