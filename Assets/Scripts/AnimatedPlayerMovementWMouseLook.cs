@@ -7,7 +7,7 @@ public class AnimatedPlayerMovementWMouseLook : MonoBehaviour
     public Transform cameraTransform;
 
     [Header("Movement Settings")]
-    public float speed =Plaf;
+    public float speed = 5f;
 
     private CharacterController controller;
     private Animator animator;
