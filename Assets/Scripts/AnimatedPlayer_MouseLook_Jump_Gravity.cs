@@ -97,11 +97,13 @@ public class AnimatedPlayer_MouseLook_Jump_Gravity : MonoBehaviour
 
         Vector3 move = transform.right * x + transform.forward * z;
 
+        // Apply movement
         if (controller != null)
         {
             controller.Move(move * speed * Time.deltaTime);
         }
 
+        // Update animator parameters
         if (animator != null)
         {
             if (hasIsMovingParameter)
@@ -114,13 +116,6 @@ public class AnimatedPlayer_MouseLook_Jump_Gravity : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             Debug.Log("Jump button pressed");
-        }
-        Debug.Log("Is Grounded: " + controller.isGrounded); // Add this line
-
-        // Jump input
-        if (Input.GetButtonDown("Jump") )
-        {
-            Debug.Log("Jump");
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
             if (animator != null && hasIsJumpingParameter)
             {
@@ -128,7 +123,16 @@ public class AnimatedPlayer_MouseLook_Jump_Gravity : MonoBehaviour
             }
         }
 
-        // Apply gravity
+        // Apply gravity continuously
+        velocity.y += gravity * Time.deltaTime;
+
+        // Apply the velocity to the CharacterController
+        if (controller != null)
+        {
+            controller.Move(velocity * Time.deltaTime);
+        }
+
+        // Reset jumping animation when grounded
         if (controller.isGrounded)
         {
             velocity.y = -2f; // Ensure the player stays grounded
@@ -137,11 +141,5 @@ public class AnimatedPlayer_MouseLook_Jump_Gravity : MonoBehaviour
                 animator.SetBool("isJumping", false);
             }
         }
-        else
-        {
-            velocity.y += gravity * Time.deltaTime;
-        }
-
-        controller.Move(velocity * Time.deltaTime);
     }
 }
