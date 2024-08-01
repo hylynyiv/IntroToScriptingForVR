@@ -94,7 +94,7 @@ public class AnimatedPlayer_MouseLook_Jump_Gravity : MonoBehaviour
         }
 
         // Jump input
-        if (Input.GetButtonDown("Jump") && controller.isGrounded)
+        if (Input.GetButtonDown("Jump"))
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
