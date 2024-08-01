@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class AnimatedPlayerMovementWMouseLook : MonoBehaviour
+public class AnimatedPlayer_MouseLook_GroundCheck : MonoBehaviour
 {
     [Header("Mouse Look Settings")]
     public float mouseSensitivity = 200f;
