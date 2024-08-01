@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq; // Needed for the Any() method
 
 public class AnimatedPlayer_MouseLook_Jump_Gravity : MonoBehaviour
 {
-  
     [Header("Mouse Look Settings")]
     public float mouseSensitivity = 200f;
     public Transform cameraTransform;
@@ -20,6 +20,8 @@ public class AnimatedPlayer_MouseLook_Jump_Gravity : MonoBehaviour
     private float xRotation;
     private float yRotation;
     private Vector3 velocity;
+    private bool hasIsMovingParameter;
+    private bool hasIsJumpingParameter;
 
     void Start()
     {
@@ -35,6 +37,22 @@ public class AnimatedPlayer_MouseLook_Jump_Gravity : MonoBehaviour
         if (animator == null)
         {
             Debug.LogError("Animator component missing from the player.");
+        }
+        else
+        {
+            // Check if the 'isMoving' parameter exists
+            hasIsMovingParameter = animator.parameters.Any(param => param.name == "isMoving" && param.type == AnimatorControllerParameterType.Bool);
+            if (!hasIsMovingParameter)
+            {
+                Debug.LogWarning("Animator parameter 'isMoving' is missing.");
+            }
+
+            // Check if the 'isJumping' parameter exists
+            hasIsJumpingParameter = animator.parameters.Any(param => param.name == "isJumping" && param.type == AnimatorControllerParameterType.Bool);
+            if (!hasIsJumpingParameter)
+            {
+                Debug.LogWarning("Animator parameter 'isJumping' is missing.");
+            }
         }
 
         Cursor.lockState = CursorLockMode.Locked;
@@ -70,6 +88,9 @@ public class AnimatedPlayer_MouseLook_Jump_Gravity : MonoBehaviour
 
     void HandleMovement()
     {
+        // Debugging: Check if method is called
+        Debug.Log("HandleMovement called");
+
         // Movement input
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
@@ -83,26 +104,38 @@ public class AnimatedPlayer_MouseLook_Jump_Gravity : MonoBehaviour
 
         if (animator != null)
         {
-            if (move != Vector3.zero)
+            if (hasIsMovingParameter)
             {
-                animator.SetBool("isMoving", true);
-            }
-            else
-            {
-                animator.SetBool("isMoving", false);
+                animator.SetBool("isMoving", move != Vector3.zero);
             }
         }
 
-        // Jump input
+        // Debugging: Check for jump input
         if (Input.GetButtonDown("Jump"))
         {
+            Debug.Log("Jump button pressed");
+        }
+        Debug.Log("Is Grounded: " + controller.isGrounded); // Add this line
+
+        // Jump input
+        if (Input.GetButtonDown("Jump") && controller.isGrounded)
+        {
+            Debug.Log("Jump");
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            if (animator != null && hasIsJumpingParameter)
+            {
+                animator.SetBool("isJumping", true);
+            }
         }
 
         // Apply gravity
         if (controller.isGrounded)
         {
             velocity.y = -2f; // Ensure the player stays grounded
+            if (animator != null && hasIsJumpingParameter)
+            {
+                animator.SetBool("isJumping", false);
+            }
         }
         else
         {
