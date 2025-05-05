@@ -1,7 +1,11 @@
 using UnityEngine;
+using System.Linq; // Für animator.parameters.Any()
 
 public class DanceController : MonoBehaviour
 {
+    [Header("Dance Settings")]
+    public KeyCode danceKey = KeyCode.G; // Im Inspector konfigurierbar
+
     private Animator animator;
     private bool isDancing = false;
     private bool hasIsDancingParameter;
@@ -25,7 +29,7 @@ public class DanceController : MonoBehaviour
 
     void Update()
     {
-        if (hasIsDancingParameter && Input.GetKeyDown(KeyCode.G))
+        if (hasIsDancingParameter && Input.GetKeyDown(danceKey))
         {
             isDancing = !isDancing;
             animator.SetBool("isDancing", isDancing);
