@@ -9,14 +9,17 @@ public class AnimatedPlayerMovementWMouseLook : MonoBehaviour
     [Header("Movement Settings")]
     public float speed = 5f;
 
+    [Header("Gravity Settings")]
+    public float gravity = -9.81f;
+
     private CharacterController controller;
     private Animator animator;
     private float xRotation;
     private float yRotation;
+    private Vector3 velocity;
 
     void Start()
     {
-        // Ensure that the CharacterController and Animator components are assigned
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
 
@@ -32,11 +35,9 @@ public class AnimatedPlayerMovementWMouseLook : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
 
-        // Initialize rotation with the current camera rotation
         xRotation = cameraTransform.localEulerAngles.x;
         yRotation = transform.localEulerAngles.y;
 
-        // Ensure the camera is a child of the player object
         if (cameraTransform.parent != transform)
         {
             cameraTransform.SetParent(transform);
@@ -71,18 +72,19 @@ public class AnimatedPlayerMovementWMouseLook : MonoBehaviour
         if (controller != null)
         {
             controller.Move(move * speed * Time.deltaTime);
+
+            if (controller.isGrounded && velocity.y < 0)
+            {
+                velocity.y = -2f; // Helps keep grounded
+            }
+
+            velocity.y += gravity * Time.deltaTime;
+            controller.Move(velocity * Time.deltaTime);
         }
 
         if (animator != null)
         {
-            if (move != Vector3.zero)
-            {
-                animator.SetBool("isMoving", true);
-            }
-            else
-            {
-                animator.SetBool("isMoving", false);
-            }
+            animator.SetBool("isMoving", move != Vector3.zero);
         }
     }
 }
